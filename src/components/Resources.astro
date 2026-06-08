@@ -1,0 +1,56 @@
+---
+import Section from './Section.astro';
+import SectionNumber from './SectionNumber.astro';
+import Icon from './Icon.astro';
+import { resources } from '../data/resources';
+
+const typeIcon: Record<string, string> = {
+  article: 'file-text',
+  video: 'play',
+  podcast: 'mic',
+};
+---
+
+<Section id="recursos" bg="paper">
+  <div class="relative">
+    <SectionNumber number="05" class="absolute -top-12 right-0 text-[7rem] sm:text-[10rem]" />
+
+    <div class="relative mb-10 max-w-2xl">
+      <p data-reveal class="mb-3 text-sm font-medium uppercase tracking-wider text-summit">
+        En los medios
+      </p>
+      <h2 data-reveal class="text-3xl font-semibold leading-tight sm:text-4xl">
+        Recursos y publicaciones
+      </h2>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      {
+        resources.map((r, i) => (
+          <a
+            href={r.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-reveal
+            data-reveal-stagger={i * 70}
+            class="group flex items-center gap-4 rounded-2xl border border-line bg-stone p-5 transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-summit/30 hover:shadow-soft"
+          >
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-summit/8 text-summit transition-colors group-hover:bg-summit group-hover:text-paper">
+              <Icon name={typeIcon[r.type]} class="h-5 w-5" />
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-xs font-medium uppercase tracking-wider text-clay">
+                {r.typeLabel} · {r.source}
+              </span>
+              <span class="mt-0.5 block truncate font-medium text-ink">{r.title}</span>
+            </span>
+            <Icon
+              name="arrow-up-right"
+              class="h-5 w-5 shrink-0 text-ink/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-summit"
+            />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</Section>

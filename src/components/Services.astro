@@ -1,0 +1,80 @@
+---
+import Section from './Section.astro';
+import SectionNumber from './SectionNumber.astro';
+import Icon from './Icon.astro';
+import { services } from '../data/services';
+---
+
+<Section id="servicios" bg="paper">
+  <div class="relative">
+    <SectionNumber number="03" class="absolute -top-12 right-0 text-[7rem] sm:text-[10rem]" />
+
+    <div class="relative mb-12 max-w-2xl">
+      <p data-reveal class="mb-3 text-sm font-medium uppercase tracking-wider text-summit">
+        Nuestros servicios
+      </p>
+      <h2 data-reveal class="mb-5 text-3xl font-semibold leading-tight sm:text-4xl">
+        Soluciones simples, prácticas y conectadas con tu realidad
+      </h2>
+      <p data-reveal class="text-lg leading-relaxed text-ink/75">
+        En Sherpas Consulting acompañamos a las organizaciones a profesionalizar su gestión de
+        personas, fortalecer sus liderazgos y desarrollar equipos más preparados para alcanzar sus
+        objetivos. Trabajamos junto a empresas que están creciendo, cambiando o enfrentando nuevos
+        desafíos, entregando soluciones simples, prácticas y conectadas con su realidad.
+      </p>
+    </div>
+
+    <div class="divide-y divide-line border-y border-line">
+      {
+        services.map((s, i) => (
+          <details class="service group" name="servicios" open={i === 0} data-reveal data-reveal-stagger={i * 70}>
+            <summary class="flex cursor-pointer list-none items-start gap-5 py-7 transition-colors hover:text-summit">
+              <span class="font-serif text-2xl font-light text-clay sm:text-3xl">{s.number}</span>
+              <span class="flex-1">
+                <span class="block text-xl font-semibold sm:text-2xl">{s.title}</span>
+                <span class="mt-1.5 block text-base leading-relaxed text-ink/65">{s.hook}</span>
+              </span>
+              <span class="mt-1 shrink-0 text-summit transition-transform duration-300 group-open:rotate-180">
+                <Icon name="chevron-down" class="h-6 w-6" />
+              </span>
+            </summary>
+            <div class="service-body pb-8 pl-0 sm:pl-[3.25rem]">
+              <p class="max-w-prose text-[1.05rem] leading-relaxed text-ink/80">{s.body}</p>
+              <a href="#contacto" class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-summit link-underline">
+                Conversemos sobre este servicio
+                <Icon name="arrow-right" class="h-4 w-4" />
+              </a>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</Section>
+
+<style>
+  /* Marcador nativo oculto */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Apertura suave del cuerpo del acordeón */
+  .service-body {
+    overflow: hidden;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    details[open] .service-body {
+      animation: service-open 0.4s var(--ease-smooth);
+    }
+    @keyframes service-open {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+</style>

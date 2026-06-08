@@ -1,0 +1,102 @@
+---
+import Icon from './Icon.astro';
+
+const navLinks = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#proposito', label: 'Propósito' },
+  { href: '#brujula', label: 'Cómo trabajamos' },
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#testimonios', label: 'Testimonios' },
+  { href: '#contacto', label: 'Contacto' },
+];
+---
+
+<header
+  data-header
+  class="fixed inset-x-0 top-0 z-40 transition-all duration-300 ease-smooth"
+>
+  <div class="container-page flex h-[var(--header-h)] items-center justify-between">
+    <!-- Logo -->
+    <a href="#inicio" class="flex items-center gap-2.5 text-ink" aria-label="Sherpas Consulting — inicio">
+      <Icon name="mountain" class="h-6 w-6 text-summit" />
+      <span class="font-serif text-lg font-semibold tracking-tight">Sherpas<span class="text-summit"> Consulting</span></span>
+    </a>
+
+    <!-- Nav desktop -->
+    <nav class="hidden items-center gap-7 md:flex" aria-label="Navegación principal">
+      {
+        navLinks.map((l) => (
+          <a
+            href={l.href}
+            data-nav-link
+            class="nav-link text-sm text-ink/70 transition-colors hover:text-ink"
+          >
+            {l.label}
+          </a>
+        ))
+      }
+      <a href="#contacto" class="btn btn-primary !px-5 !py-2.5">Conversemos</a>
+    </nav>
+
+    <!-- Toggle mobile -->
+    <button
+      data-menu-toggle
+      type="button"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink md:hidden"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <Icon name="menu" class="h-6 w-6" />
+    </button>
+  </div>
+
+  <!-- Menú mobile -->
+  <div
+    id="mobile-menu"
+    data-mobile-menu
+    class="hidden border-t border-line bg-paper/95 backdrop-blur-md md:hidden"
+  >
+    <nav class="container-page flex flex-col py-4" aria-label="Navegación móvil">
+      {
+        navLinks.map((l) => (
+          <a href={l.href} class="border-b border-line/60 py-3 text-base text-ink/80">
+            {l.label}
+          </a>
+        ))
+      }
+      <a href="#contacto" class="btn btn-primary mt-4">Conversemos</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  [data-header].is-scrolled {
+    background-color: rgba(251, 250, 247, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 1px 0 rgba(28, 43, 45, 0.02);
+  }
+
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 1.5px;
+    width: 0;
+    background: var(--clay);
+    transition: width 0.3s var(--ease-smooth);
+  }
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
+    width: 100%;
+  }
+  .nav-link.is-active {
+    color: var(--ink);
+  }
+</style>

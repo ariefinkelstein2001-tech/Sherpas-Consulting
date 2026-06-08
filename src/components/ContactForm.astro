@@ -1,0 +1,139 @@
+---
+import Icon from './Icon.astro';
+import { services } from '../data/services';
+
+// Endpoint inyectado por variable de entorno. Si no existe, se usa mailto: (fallback).
+const endpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? '';
+const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'contacto@sherpasconsulting.cl';
+
+const field =
+  'w-full rounded-xl border border-line bg-paper px-4 py-3 text-ink placeholder:text-ink/35 transition-colors focus:border-summit focus:outline-none focus:ring-2 focus:ring-summit/25';
+const label = 'mb-1.5 block text-sm font-medium text-ink/80';
+---
+
+<form
+  id="contact-form"
+  class="rounded-2xl border border-line bg-paper p-6 shadow-soft sm:p-8"
+  method="POST"
+  action={endpoint || undefined}
+  data-endpoint={endpoint}
+  data-email={contactEmail}
+  novalidate
+>
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label class={label} for="cf-nombre">Nombre <span class="text-clay">*</span></label>
+      <input id="cf-nombre" name="nombre" type="text" required autocomplete="name" class={field} />
+    </div>
+    <div>
+      <label class={label} for="cf-empresa">Empresa</label>
+      <input id="cf-empresa" name="empresa" type="text" autocomplete="organization" class={field} />
+    </div>
+    <div>
+      <label class={label} for="cf-cargo">Cargo</label>
+      <input id="cf-cargo" name="cargo" type="text" autocomplete="organization-title" class={field} />
+    </div>
+    <div>
+      <label class={label} for="cf-email">Email <span class="text-clay">*</span></label>
+      <input id="cf-email" name="email" type="email" required autocomplete="email" class={field} />
+    </div>
+    <div>
+      <label class={label} for="cf-telefono">Teléfono <span class="text-ink/40">(opcional)</span></label>
+      <input id="cf-telefono" name="telefono" type="tel" autocomplete="tel" class={field} />
+    </div>
+    <div>
+      <label class={label} for="cf-servicio">Servicio de interés</label>
+      <select id="cf-servicio" name="servicio" class={field}>
+        <option value="">Selecciona una opción…</option>
+        {services.map((s) => <option value={s.value}>{s.title}</option>)}
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+    <div class="sm:col-span-2">
+      <label class={label} for="cf-mensaje">Mensaje <span class="text-clay">*</span></label>
+      <textarea id="cf-mensaje" name="mensaje" rows="4" required class={field}></textarea>
+    </div>
+  </div>
+
+  <!-- Honeypot anti-spam (oculto a usuarios reales) -->
+  <div class="absolute left-[-9999px]" aria-hidden="true">
+    <label for="cf-website">No completar este campo</label>
+    <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <button type="submit" class="btn btn-primary">
+      Enviar mensaje
+      <Icon name="send" class="h-4 w-4" />
+    </button>
+    <p data-form-status role="status" aria-live="polite" class="text-sm"></p>
+  </div>
+</form>
+
+<script>
+  function initContactForm() {
+    const form = document.querySelector<HTMLFormElement>('#contact-form');
+    if (!form) return;
+    const status = form.querySelector<HTMLElement>('[data-form-status]');
+    const endpoint = form.dataset.endpoint || '';
+    const email = form.dataset.email || '';
+
+    const setStatus = (msg: string, kind: 'ok' | 'error' | '') => {
+      if (!status) return;
+      status.textContent = msg;
+      status.className =
+        'text-sm ' +
+        (kind === 'ok' ? 'text-summit' : kind === 'error' ? 'text-clay' : '');
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Honeypot: si está lleno, fingimos éxito y abortamos.
+      if ((form.elements.namedItem('website') as HTMLInputElement)?.value) {
+        setStatus('¡Gracias! Te contactaremos pronto.', 'ok');
+        return;
+      }
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const data = new FormData(form);
+
+      // Sin endpoint configurado → fallback a mailto:
+      if (!endpoint) {
+        const subject = encodeURIComponent('Contacto desde el sitio — Sherpas Consulting');
+        const body = encodeURIComponent(
+          `Nombre: ${data.get('nombre')}\nEmpresa: ${data.get('empresa')}\nCargo: ${data.get('cargo')}\nEmail: ${data.get('email')}\nTeléfono: ${data.get('telefono')}\nServicio: ${data.get('servicio')}\n\n${data.get('mensaje')}`,
+        );
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        setStatus('Abrimos tu correo para enviar el mensaje.', 'ok');
+        return;
+      }
+
+      try {
+        setStatus('Enviando…', '');
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          form.reset();
+          setStatus('¡Gracias! Hemos recibido tu mensaje y te contactaremos pronto.', 'ok');
+        } else {
+          setStatus('Hubo un problema al enviar. Inténtalo de nuevo o escríbenos por correo.', 'error');
+        }
+      } catch {
+        setStatus('No pudimos enviar el mensaje. Revisa tu conexión e inténtalo de nuevo.', 'error');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm);
+  } else {
+    initContactForm();
+  }
+</script>

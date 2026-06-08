@@ -1,0 +1,30 @@
+---
+import Section from './Section.astro';
+import SectionNumber from './SectionNumber.astro';
+import PrincipleCard from './PrincipleCard.astro';
+import { principles } from '../data/principles';
+---
+
+<Section id="brujula" bg="stone">
+  <div class="relative">
+    <SectionNumber number="02" class="absolute -top-12 left-0 text-[7rem] sm:text-[10rem]" />
+
+    <div class="relative mb-12 max-w-2xl">
+      <p data-reveal class="mb-3 text-sm font-medium uppercase tracking-wider text-summit">
+        Cómo acompañamos
+      </p>
+      <h2 data-reveal class="mb-5 text-3xl font-semibold leading-tight sm:text-4xl">
+        La brújula que guía nuestra forma de acompañar
+      </h2>
+      <p data-reveal class="text-lg leading-relaxed text-ink/75">
+        En Sherpas trabajamos con principios claros que orientan nuestra manera de acompañar a las
+        organizaciones. Estos principios nos permiten diseñar soluciones con sentido, cercanas a la
+        realidad de cada cliente y enfocadas en generar impacto concreto.
+      </p>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      {principles.map((p, i) => <PrincipleCard {...p} stagger={i * 90} />)}
+    </div>
+  </div>
+</Section>

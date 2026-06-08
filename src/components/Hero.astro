@@ -1,0 +1,88 @@
+---
+import MountainParallax from './MountainParallax.astro';
+import ContourBackground from './ContourBackground.astro';
+import Icon from './Icon.astro';
+
+// H1 dividido en líneas para entrada escalonada (stagger).
+const headlineLines = [
+  'Acompañamos a las organizaciones',
+  'a llegar más lejos, fortaleciendo',
+  'a las personas que hacen posible',
+  'su crecimiento.',
+];
+---
+
+<section id="inicio" class="relative flex min-h-[100svh] items-center overflow-hidden">
+  <!-- Cielo amanecer: de --stone a un durazno tenue hacia el horizonte -->
+  <div
+    class="absolute inset-0 -z-10"
+    style="background:linear-gradient(180deg, #F4F1EC 0%, #F4F1EC 42%, #F6EBE2 70%, #F3DECB 100%)"
+  >
+  </div>
+
+  <!-- Curvas de nivel animadas sobre el cielo -->
+  <ContourBackground class="-z-10" color="var(--mist)" opacity={0.3} animated />
+
+  <!-- Parallax de montañas en capas -->
+  <MountainParallax variant="hero" class="-z-10" />
+
+  <div class="container-page relative w-full pb-28 pt-32 sm:pb-32">
+    <div class="max-w-3xl">
+      <p
+        data-reveal
+        class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-paper/60 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-summit backdrop-blur-sm"
+      >
+        <Icon name="mountain" class="h-3.5 w-3.5" />
+        Consultora de gestión de personas
+      </p>
+
+      <h1 class="font-serif text-4xl font-semibold leading-[1.08] text-ink sm:text-5xl lg:text-6xl">
+        {
+          headlineLines.map((line, i) => (
+            <span class="block overflow-hidden">
+              <span data-reveal data-reveal-stagger={i * 90} class="block">
+                {line}
+              </span>
+            </span>
+          ))
+        }
+      </h1>
+
+      <p
+        data-reveal
+        data-reveal-stagger="420"
+        class="mt-7 max-w-prose text-lg leading-relaxed text-ink/75"
+      >
+        En Sherpas Consulting creemos que las organizaciones llegan más lejos cuando sus líderes y
+        equipos evolucionan junto con el negocio. Por eso acompañamos a empresas en sus desafíos de
+        gestión de personas, liderazgo y desarrollo organizacional, combinando experiencia senior,
+        mirada estratégica y herramientas prácticas.
+      </p>
+
+      <p
+        data-reveal
+        data-reveal-stagger="520"
+        class="mt-6 font-serif text-xl italic text-clay sm:text-2xl"
+      >
+        Porque ninguna cima se alcanza sola.
+      </p>
+
+      <div data-reveal data-reveal-stagger="600" class="mt-9 flex flex-wrap items-center gap-4">
+        <a href="#contacto" class="btn btn-primary">Conversemos</a>
+        <a href="#servicios" class="btn btn-ghost">
+          Conoce nuestros servicios
+          <Icon name="arrow-down" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Indicador de scroll -->
+  <a
+    href="#proposito"
+    class="absolute bottom-7 left-1/2 -translate-x-1/2 text-summit/70 motion-reduce:hidden"
+    aria-label="Bajar a la siguiente sección"
+  >
+    <Icon name="arrow-down" class="h-6 w-6 animate-scroll-bob" />
+  </a>
+</section>

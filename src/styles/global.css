@@ -1,0 +1,153 @@
+/* Tipografías variables (cuerpo + titulares) con font-display: swap */
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/fraunces';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------------------------------------------------------------------------
+   Tokens de marca como CSS vars (espejo de tailwind.config.mjs).
+   Centralizados aquí para SVGs, gradientes y utilidades puntuales.
+---------------------------------------------------------------------------- */
+:root {
+  --ink: #1c2b2d;
+  --summit: #0f4c5c;
+  --summit-deep: #0a363f;
+  --clay: #c46a4b;
+  --mist: #9fb8b5;
+  --stone: #f4f1ec;
+  --paper: #fbfaf7;
+  --line: #e2dcd2;
+
+  --header-h: 4.5rem;
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-stone text-ink font-sans antialiased;
+    font-feature-settings: 'ss01', 'cv01';
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif text-ink;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+
+  /* Foco accesible y visible en TODO lo interactivo */
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--summit);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: rgba(15, 76, 92, 0.16);
+  }
+}
+
+@layer components {
+  /* Contenedor de lectura y de layout */
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+
+  /* Botones */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium
+           transition-all duration-200 ease-smooth;
+    min-height: 44px;
+  }
+  .btn-primary {
+    @apply bg-summit text-paper shadow-soft hover:bg-summit-deep hover:shadow-lift hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply border border-summit/30 text-summit hover:border-summit hover:bg-summit/5;
+  }
+
+  /* Subrayado que se dibuja al hover en links de texto */
+  .link-underline {
+    background-image: linear-gradient(var(--clay), var(--clay));
+    background-size: 0% 1.5px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.3s var(--ease-smooth);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1.5px;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Scroll-reveal coreografiado (fade + subida, con stagger por data-attr)
+---------------------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s var(--ease-smooth),
+    transform 0.7s var(--ease-smooth);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Capas de parallax: el JS sólo escribe la variable --py */
+[data-parallax] {
+  will-change: transform;
+  transform: translate3d(0, var(--py, 0), 0);
+}
+
+/* Grano de película sutil para fondos oscuros */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ----------------------------------------------------------------------------
+   prefers-reduced-motion: todo estático y nítido
+---------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-parallax] {
+    transform: none !important;
+  }
+}

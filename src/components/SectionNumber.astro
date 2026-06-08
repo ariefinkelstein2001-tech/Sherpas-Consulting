@@ -1,0 +1,15 @@
+---
+// Número grande en serif semitransparente detrás del título (estilo revista).
+interface Props {
+  number: string;
+  class?: string;
+}
+const { number, class: className = '' } = Astro.props;
+---
+
+<span
+  class={`pointer-events-none select-none font-serif font-light leading-none text-summit/10 ${className}`}
+  aria-hidden="true"
+>
+  {number}
+</span>

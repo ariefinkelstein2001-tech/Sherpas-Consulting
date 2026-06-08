@@ -1,0 +1,35 @@
+---
+// Motivo de curvas de nivel topográficas (SVG decorativo, tenue).
+// `animated`: dibuja las líneas con stroke-dashoffset al entrar en viewport.
+interface Props {
+  class?: string;
+  color?: string;
+  opacity?: number;
+  animated?: boolean;
+}
+const {
+  class: className = '',
+  color = 'var(--mist)',
+  opacity = 0.35,
+  animated = false,
+} = Astro.props;
+---
+
+<svg
+  class={`pointer-events-none absolute inset-0 h-full w-full ${animated ? 'js-contour' : ''} ${className}`}
+  viewBox="0 0 1200 800"
+  preserveAspectRatio="xMidYMid slice"
+  fill="none"
+  aria-hidden="true"
+  style={`color:${color};opacity:${opacity}`}
+>
+  <g stroke="currentColor" stroke-width="1.25" fill="none">
+    <path d="M-50,640 C200,560 380,700 600,620 C820,540 1000,660 1250,580" />
+    <path d="M-50,560 C200,480 400,610 600,540 C800,470 1000,580 1250,500" />
+    <path d="M-50,480 C220,410 400,520 600,460 C820,400 1010,500 1250,430" />
+    <path d="M-50,400 C220,340 410,430 600,380 C800,330 1020,420 1250,360" />
+    <path d="M-50,320 C240,270 420,350 600,310 C800,270 1030,340 1250,290" />
+    <path d="M-50,240 C240,200 430,270 600,240 C790,210 1040,260 1250,220" />
+    <path d="M-50,160 C260,130 440,190 600,170 C790,150 1050,180 1250,160" />
+  </g>
+</svg>

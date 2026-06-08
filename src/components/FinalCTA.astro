@@ -1,0 +1,37 @@
+---
+import ContourBackground from './ContourBackground.astro';
+import MountainParallax from './MountainParallax.astro';
+import ContactForm from './ContactForm.astro';
+---
+
+<section id="contacto" class="grain relative overflow-hidden bg-summit-deep text-stone">
+  <!-- Curvas de nivel tenues + cumbre con parallax -->
+  <ContourBackground color="var(--mist)" opacity={0.12} />
+  <MountainParallax variant="summit" class="opacity-90" />
+
+  <!-- Cumbre con amanecer (degradé cálido en el horizonte) -->
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-2/3"
+    style="background:radial-gradient(120% 80% at 50% 0%, rgba(196,106,75,0.22), transparent 60%)"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page relative py-24 sm:py-32">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2
+        data-reveal
+        class="font-serif text-4xl font-semibold leading-[1.1] text-stone sm:text-5xl lg:text-6xl"
+      >
+        Porque ninguna cima<br />se alcanza sola.
+      </h2>
+      <p data-reveal data-reveal-stagger="120" class="mt-6 text-lg text-stone/80 sm:text-xl">
+        ¿Conversamos sobre el próximo desafío de tu organización?
+      </p>
+    </div>
+
+    <div data-reveal data-reveal-stagger="200" class="mx-auto mt-12 max-w-2xl">
+      <ContactForm />
+    </div>
+  </div>
+</section>

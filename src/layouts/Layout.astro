@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Sherpas Consulting — Gestión de personas, liderazgo y desarrollo organizacional',
+  description = 'Acompañamos a las organizaciones a llegar más lejos, fortaleciendo a las personas que hacen posible su crecimiento. Consultora chilena de gestión de personas, liderazgo y desarrollo organizacional.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+// TODO: reemplazar el placeholder SVG por una imagen OG real (1200×630, .png/.jpg).
+const ogImage = new URL('/og-image.svg', Astro.site).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Sherpas Consulting',
+  description,
+  url: Astro.site?.toString(),
+  areaServed: 'CL',
+  knowsLanguage: 'es-CL',
+  slogan: 'Porque ninguna cima se alcanza sola.',
+  serviceType: [
+    'Gerenciamiento de Personas a Tiempo Parcial',
+    'Coaching Ejecutivo',
+    'Programas de Liderazgo',
+    'Asesorías en Gestión de Personas',
+  ],
+  // TODO: agregar email, teléfono, sameAs (LinkedIn) y address reales.
+};
+---
+
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#0F4C5C" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sherpas Consulting" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_CL" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-summit focus:px-4 focus:py-2 focus:text-paper"
+      >Saltar al contenido</a
+    >
+    <slot />
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>

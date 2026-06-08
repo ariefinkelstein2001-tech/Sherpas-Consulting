@@ -1,0 +1,32 @@
+---
+import type { Testimonial } from '../data/testimonials';
+type Props = Testimonial;
+const { tag, company, name, role, quote, pending } = Astro.props;
+---
+
+<article
+  class="flex h-full snap-center flex-col rounded-2xl border border-line bg-paper p-7 sm:p-9"
+>
+  <div class="mb-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+    <span class="rounded-full bg-summit/8 px-3 py-1 font-medium text-summit">{tag}</span>
+    <span class="font-medium text-ink/60">{company}</span>
+  </div>
+
+  {
+    pending ? (
+      <p class="flex-1 font-serif text-lg italic leading-relaxed text-ink/45">
+        Testimonio en camino. Pronto compartiremos la experiencia de {company}.
+      </p>
+    ) : (
+      <blockquote class="flex-1 text-[1.02rem] leading-relaxed text-ink/80">
+        <span class="mr-1 font-serif text-3xl leading-none text-clay/70" aria-hidden="true">“</span>
+        {quote}
+      </blockquote>
+    )
+  }
+
+  <footer class="mt-7 border-t border-line pt-5">
+    <p class="font-semibold text-ink">{name}</p>
+    <p class="text-sm text-ink/60">{role}</p>
+  </footer>
+</article>

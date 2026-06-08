@@ -1,0 +1,33 @@
+---
+// Ruta de ascenso global: sendero punteado fijo en el costado izquierdo que
+// se va "dibujando" según el progreso de scroll de la página (stroke-dashoffset).
+// Oculto en mobile y bajo prefers-reduced-motion (vía CSS). Decorativo.
+---
+
+<div
+  class="ascent-path pointer-events-none fixed left-5 top-0 z-30 hidden h-screen w-8 lg:block motion-reduce:hidden"
+  aria-hidden="true"
+>
+  <svg viewBox="0 0 32 800" preserveAspectRatio="none" class="h-full w-full" fill="none">
+    {/* Sendero base tenue */}
+    <path
+      d="M16,0 C8,120 24,200 16,320 C8,440 24,520 16,640 C10,720 16,760 16,800"
+      stroke="var(--mist)"
+      stroke-width="2"
+      stroke-dasharray="2 8"
+      stroke-linecap="round"
+      opacity="0.5"
+    />
+    {/* Sendero recorrido (se revela con el scroll) */}
+    <path
+      class="js-ascent-progress"
+      d="M16,0 C8,120 24,200 16,320 C8,440 24,520 16,640 C10,720 16,760 16,800"
+      stroke="var(--summit)"
+      stroke-width="2.5"
+      stroke-dasharray="2 8"
+      stroke-linecap="round"
+      pathLength="1"
+      style="stroke-dasharray:1;stroke-dashoffset:1"
+    />
+  </svg>
+</div>

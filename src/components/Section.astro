@@ -1,0 +1,28 @@
+---
+// Wrapper de sección con padding vertical consistente y fondo opcional.
+interface Props {
+  id?: string;
+  class?: string;
+  bg?: 'stone' | 'paper' | 'summit-deep';
+  contained?: boolean;
+}
+const { id, class: className = '', bg = 'stone', contained = true } = Astro.props;
+
+const bgClass = {
+  stone: 'bg-stone text-ink',
+  paper: 'bg-paper text-ink',
+  'summit-deep': 'bg-summit-deep text-stone',
+}[bg];
+---
+
+<section id={id} class={`relative scroll-mt-24 py-20 sm:py-28 ${bgClass} ${className}`}>
+  {
+    contained ? (
+      <div class="container-page relative">
+        <slot />
+      </div>
+    ) : (
+      <slot />
+    )
+  }
+</section>
