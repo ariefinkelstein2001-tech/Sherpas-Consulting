@@ -1,0 +1,48 @@
+<!-- ===================================================================== -->
+<!--  KAIROS · BANNER PRINCIPAL HOME · MUNDIAL 23                          -->
+<!--  Pega este bloque en el HOME, lo más arriba posible:                  -->
+<!--   · Tema Shopify: Personalizar > sección "Custom Liquid" arriba del   -->
+<!--     todo en la Home, o                                                -->
+<!--   · PageFly: elemento "HTML / Custom Liquid" como primera sección.    -->
+<!--  Al hacer click lleva a la sección Mundial (/pages/mundial).          -->
+<!-- ===================================================================== -->
+
+<a href="/pages/mundial" class="km-home-banner" aria-label="Mundial 23 · Pack Mundialero Kairos · Participa por 365 latas gratis">
+  <img
+    src="https://cdn.shopify.com/s/files/1/0668/0081/2327/files/ChatGPT_Image_9_jun_2026_11_32_35_a.m..png?v=1781019490"
+    alt="Mundial 23 · Pack Mundialero Kairos · Participa por 365 latas gratis"
+    loading="eager" fetchpriority="high" decoding="async">
+  <span class="km-home-banner__cta">⚽ Participar ahora</span>
+</a>
+
+<style>
+  .km-home-banner{display:block;position:relative;width:100%;line-height:0;
+    overflow:hidden;text-decoration:none;cursor:pointer;
+    transition:filter .25s ease, transform .25s ease}
+  .km-home-banner img{width:100%;height:auto;display:block}
+  .km-home-banner:hover{filter:brightness(1.04)}
+  .km-home-banner:hover img{transform:scale(1.012)}
+  .km-home-banner img{transition:transform .5s ease}
+
+  /* botón llamativo opcional (puedes borrar el <span> si no lo quieres) */
+  .km-home-banner__cta{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);
+    z-index:2;display:inline-flex;align-items:center;gap:8px;
+    font-family:'Anton','Bebas Neue',system-ui,sans-serif;font-weight:400;
+    letter-spacing:.04em;text-transform:uppercase;line-height:1;
+    font-size:clamp(15px,2.6vw,24px);color:#06131a;
+    padding:.6em 1.1em;border-radius:10px;
+    background:linear-gradient(180deg,#ffe27a,#ffce1f);
+    box-shadow:0 6px 0 #c89400,0 12px 22px rgba(0,0,0,.45);
+    animation:km-bn-pulse 2s ease-in-out infinite}
+  @keyframes km-bn-pulse{0%,100%{box-shadow:0 6px 0 #c89400,0 12px 22px rgba(0,0,0,.45),0 0 0 rgba(255,206,31,0)}
+    50%{box-shadow:0 6px 0 #c89400,0 12px 22px rgba(0,0,0,.45),0 0 26px rgba(255,206,31,.6)}}
+  .km-home-banner:active .km-home-banner__cta{transform:translateX(-50%) translateY(4px);box-shadow:0 2px 0 #c89400}
+
+  @media(max-width:560px){
+    .km-home-banner__cta{bottom:7%;border-radius:8px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .km-home-banner__cta{animation:none}
+    .km-home-banner img,.km-home-banner:hover img{transition:none;transform:none}
+  }
+</style>
