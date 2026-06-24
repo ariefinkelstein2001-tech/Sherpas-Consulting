@@ -1,0 +1,54 @@
+---
+// Imagen con placeholder elegante. Si `src` está definido, muestra la foto;
+// si no, dibuja un placeholder cálido (gradiente + ícono) para que el layout
+// ya se vea "con fotos". Reemplaza luego soltando archivos en /public/images
+// y pasando `src="/images/archivo.jpg"`.
+import Icon from './Icon.astro';
+
+interface Props {
+  src?: string;
+  alt?: string;
+  ratio?: string; // p.ej. "4/3", "1/1", "3/4", "16/9"
+  accent?: 'summit' | 'clay' | 'sage' | 'amber';
+  icon?: string;
+  label?: string;
+  class?: string;
+}
+const {
+  src,
+  alt = '',
+  ratio = '4/3',
+  accent = 'summit',
+  icon = 'image',
+  label,
+  class: className = '',
+} = Astro.props;
+
+const accents: Record<string, string> = {
+  summit: 'linear-gradient(135deg, #0F4C5C 0%, #13606f 55%, #9FB8B5 100%)',
+  clay: 'linear-gradient(135deg, #C46A4B 0%, #d98a6b 55%, #F3DECB 100%)',
+  sage: 'linear-gradient(135deg, #5c7b78 0%, #9FB8B5 60%, #F4F1EC 100%)',
+  amber: 'linear-gradient(135deg, #C46A4B 0%, #E0A458 55%, #F4E3C9 100%)',
+};
+---
+
+<figure
+  class={`relative overflow-hidden rounded-2xl ${className}`}
+  style={`aspect-ratio:${ratio}`}
+>
+  {
+    src ? (
+      <img src={src} alt={alt} loading="lazy" decoding="async" class="h-full w-full object-cover" />
+    ) : (
+      <div
+        class="grain flex h-full w-full flex-col items-center justify-center gap-2 text-paper/90"
+        style={`background:${accents[accent]}`}
+        role="img"
+        aria-label={alt || label || 'Imagen pendiente'}
+      >
+        <Icon name={icon} class="h-9 w-9 opacity-80" />
+        {label && <span class="text-xs font-medium uppercase tracking-wider opacity-80">{label}</span>}
+      </div>
+    )
+  }
+</figure>

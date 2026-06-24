@@ -48,9 +48,9 @@ import { testimonials } from '../data/testimonials';
       class="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-6 pb-4 sm:-mx-8 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
       {
-        testimonials.map((t) => (
+        testimonials.map((t, i) => (
           <div class="w-[88%] shrink-0 sm:w-[58%] lg:w-[40%]">
-            <TestimonialCard {...t} />
+            <TestimonialCard {...t} accent={(['summit', 'clay', 'amber', 'sage'] as const)[i % 4]} />
           </div>
         ))
       }
@@ -83,9 +83,31 @@ import { testimonials } from '../data/testimonials';
     update();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSlider);
-  } else {
+  // "Leer más / Leer menos" en cada testimonio
+  function initQuoteToggles() {
+    document.querySelectorAll<HTMLButtonElement>('[data-quote-toggle]').forEach((btn) => {
+      const quote = btn.parentElement?.querySelector<HTMLElement>('[data-quote]');
+      if (!quote) return;
+      // Oculta el botón si el texto no se desborda (cabe completo)
+      if (quote.scrollHeight <= quote.clientHeight + 4) {
+        btn.style.display = 'none';
+        return;
+      }
+      btn.addEventListener('click', () => {
+        const expanded = quote.classList.toggle('is-expanded');
+        btn.textContent = expanded ? 'Leer menos' : 'Leer más';
+      });
+    });
+  }
+
+  function init() {
     initSlider();
+    initQuoteToggles();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 </script>

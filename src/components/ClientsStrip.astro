@@ -1,0 +1,22 @@
+---
+// Franja de confianza con los clientes reales (de los testimonios).
+// TODO: reemplazar los nombres por logos reales en /public/images/logos cuando se tengan.
+const clients = ['Agromillora', 'Legrand Bticino', 'Grupo MBO', 'AFP Modelo', 'Inversiones CS'];
+---
+
+<div class="border-y border-line bg-paper">
+  <div class="container-page py-8">
+    <p data-reveal class="mb-6 text-center text-xs font-medium uppercase tracking-[0.2em] text-ink/45">
+      Organizaciones que ya subieron con nosotros
+    </p>
+    <div data-reveal class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 sm:gap-x-14">
+      {
+        clients.map((c) => (
+          <span class="font-serif text-lg font-medium text-ink/55 transition-colors hover:text-summit sm:text-xl">
+            {c}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</div>

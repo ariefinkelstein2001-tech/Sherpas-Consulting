@@ -1,15 +1,40 @@
 ---
+import Icon from './Icon.astro';
 import type { Testimonial } from '../data/testimonials';
-type Props = Testimonial;
-const { tag, company, name, role, quote, pending } = Astro.props;
+
+interface Props extends Testimonial {
+  accent?: 'summit' | 'clay' | 'sage' | 'amber';
+}
+const { tag, company, name, role, quote, pending, accent = 'summit' } = Astro.props;
+
+const accents: Record<string, string> = {
+  summit: 'bg-summit text-paper',
+  clay: 'bg-clay text-paper',
+  amber: 'bg-[#E0A458] text-summit-deep',
+  sage: 'bg-[#5c7b78] text-paper',
+};
+
+// Iniciales para el avatar placeholder.
+const initials = name
+  .split(' ')
+  .slice(0, 2)
+  .map((w) => w[0])
+  .join('')
+  .toUpperCase();
 ---
 
-<article
-  class="flex h-full snap-center flex-col rounded-2xl border border-line bg-paper p-7 sm:p-9"
->
-  <div class="mb-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-    <span class="rounded-full bg-summit/8 px-3 py-1 font-medium text-summit">{tag}</span>
-    <span class="font-medium text-ink/60">{company}</span>
+<article class="flex h-full flex-col rounded-2xl border border-line bg-paper p-7 shadow-soft sm:p-8">
+  <div class="mb-5 flex items-center justify-between gap-3">
+    <span class="rounded-full bg-summit/8 px-3 py-1 text-xs font-medium text-summit">{tag}</span>
+    {
+      !pending && (
+        <span class="flex gap-0.5 text-clay" aria-label="5 de 5 estrellas">
+          {Array.from({ length: 5 }).map(() => (
+            <Icon name="star" class="h-3.5 w-3.5 fill-current" />
+          ))}
+        </span>
+      )
+    }
   </div>
 
   {
@@ -18,15 +43,49 @@ const { tag, company, name, role, quote, pending } = Astro.props;
         Testimonio en camino. Pronto compartiremos la experiencia de {company}.
       </p>
     ) : (
-      <blockquote class="flex-1 text-[1.02rem] leading-relaxed text-ink/80">
-        <span class="mr-1 font-serif text-3xl leading-none text-clay/70" aria-hidden="true">“</span>
-        {quote}
-      </blockquote>
+      <div class="flex-1">
+        <Icon name="quote" class="mb-2 h-7 w-7 text-clay/40" />
+        <blockquote
+          data-quote
+          class="quote-clamp text-[1.02rem] leading-relaxed text-ink/80"
+        >
+          {quote}
+        </blockquote>
+        <button
+          type="button"
+          data-quote-toggle
+          class="mt-2 text-sm font-medium text-summit link-underline"
+        >
+          Leer más
+        </button>
+      </div>
     )
   }
 
-  <footer class="mt-7 border-t border-line pt-5">
-    <p class="font-semibold text-ink">{name}</p>
-    <p class="text-sm text-ink/60">{role}</p>
+  <footer class="mt-7 flex items-center gap-3 border-t border-line pt-5">
+    <span
+      class={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${accents[accent]}`}
+      aria-hidden="true"
+    >
+      {initials}
+    </span>
+    <div>
+      <p class="font-semibold leading-tight text-ink">{name}</p>
+      <p class="text-sm text-ink/60">{role} · {company}</p>
+    </div>
   </footer>
 </article>
+
+<style>
+  .quote-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    overflow: hidden;
+  }
+  .quote-clamp.is-expanded {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+  }
+</style>

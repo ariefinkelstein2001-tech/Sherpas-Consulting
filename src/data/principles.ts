@@ -11,21 +11,21 @@ export const principles: Principle[] = [
   {
     icon: 'compass',
     title: 'Experiencia aplicada',
-    body: 'Integramos conocimiento, trayectoria y mirada estratégica para diseñar soluciones simples, útiles y ajustadas a cada contexto organizacional.',
+    body: 'Conocimiento, trayectoria y mirada estratégica para diseñar soluciones simples y útiles.',
   },
   {
     icon: 'handshake',
     title: 'Cercanía y compromiso',
-    body: 'Trabajamos junto a nuestros clientes con escucha, criterio y responsabilidad, construyendo vínculos de confianza y colaboración.',
+    body: 'Trabajamos junto a ti con escucha y criterio, construyendo vínculos de confianza.',
   },
   {
     icon: 'sparkles',
     title: 'Creatividad con sentido',
-    body: 'Creamos experiencias de aprendizaje prácticas, lúdicas y aplicadas, que facilitan la participación, la reflexión y la transferencia al puesto de trabajo.',
+    body: 'Experiencias de aprendizaje lúdicas y aplicadas, que facilitan la participación y la reflexión.',
   },
   {
     icon: 'trending-up',
     title: 'Transformación real',
-    body: 'Orientamos cada proceso a generar cambios observables en la forma de liderar, comunicarse, tomar decisiones y trabajar en equipo.',
+    body: 'Cambios observables en la forma de liderar, comunicarse y trabajar en equipo.',
   },
 ];

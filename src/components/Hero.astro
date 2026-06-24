@@ -1,6 +1,7 @@
 ---
 import MountainParallax from './MountainParallax.astro';
 import ContourBackground from './ContourBackground.astro';
+import Figure from './Figure.astro';
 import Icon from './Icon.astro';
 
 // H1 dividido en líneas para entrada escalonada (stagger).
@@ -27,52 +28,75 @@ const headlineLines = [
   <MountainParallax variant="hero" class="-z-10" />
 
   <div class="container-page relative w-full pb-28 pt-32 sm:pb-32">
-    <div class="max-w-3xl">
-      <p
-        data-reveal
-        class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-paper/60 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-summit backdrop-blur-sm"
-      >
-        <Icon name="mountain" class="h-3.5 w-3.5" />
-        Consultora de gestión de personas
-      </p>
+    <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+      <!-- Texto -->
+      <div class="max-w-xl">
+        <p
+          data-reveal
+          class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-paper/60 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-summit backdrop-blur-sm"
+        >
+          <Icon name="mountain" class="h-3.5 w-3.5" />
+          Consultora de gestión de personas
+        </p>
 
-      <h1 class="font-serif text-4xl font-semibold leading-[1.08] text-ink sm:text-5xl lg:text-6xl">
-        {
-          headlineLines.map((line, i) => (
-            <span class="block overflow-hidden">
-              <span data-reveal data-reveal-stagger={i * 90} class="block">
-                {line}
+        <h1 class="font-serif text-4xl font-semibold leading-[1.08] text-ink sm:text-5xl lg:text-[3.4rem]">
+          {
+            headlineLines.map((line, i) => (
+              <span class="block overflow-hidden">
+                <span data-reveal data-reveal-stagger={i * 90} class="block">
+                  {line}
+                </span>
               </span>
-            </span>
-          ))
-        }
-      </h1>
+            ))
+          }
+        </h1>
 
-      <p
-        data-reveal
-        data-reveal-stagger="420"
-        class="mt-7 max-w-prose text-lg leading-relaxed text-ink/75"
-      >
-        En Sherpas Consulting creemos que las organizaciones llegan más lejos cuando sus líderes y
-        equipos evolucionan junto con el negocio. Por eso acompañamos a empresas en sus desafíos de
-        gestión de personas, liderazgo y desarrollo organizacional, combinando experiencia senior,
-        mirada estratégica y herramientas prácticas.
-      </p>
+        <p data-reveal data-reveal-stagger="420" class="mt-7 text-lg leading-relaxed text-ink/75">
+          Acompañamos a empresas en sus desafíos de gestión de personas, liderazgo y desarrollo
+          organizacional, combinando experiencia senior, mirada estratégica y herramientas prácticas.
+        </p>
 
-      <p
-        data-reveal
-        data-reveal-stagger="520"
-        class="mt-6 font-serif text-xl italic text-clay sm:text-2xl"
-      >
-        Porque ninguna cima se alcanza sola.
-      </p>
+        <p data-reveal data-reveal-stagger="520" class="mt-6 font-serif text-xl italic text-clay sm:text-2xl">
+          Porque ninguna cima se alcanza sola.
+        </p>
 
-      <div data-reveal data-reveal-stagger="600" class="mt-9 flex flex-wrap items-center gap-4">
-        <a href="#contacto" class="btn btn-primary">Conversemos</a>
-        <a href="#servicios" class="btn btn-ghost">
-          Conoce nuestros servicios
-          <Icon name="arrow-down" class="h-4 w-4" />
-        </a>
+        <div data-reveal data-reveal-stagger="600" class="mt-9 flex flex-wrap items-center gap-4">
+          <a href="#contacto" class="btn btn-primary">Conversemos</a>
+          <a href="#servicios" class="btn btn-ghost">
+            Conoce nuestros servicios
+            <Icon name="arrow-down" class="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Composición de fotos (humaniza el hero) -->
+      <div data-reveal data-reveal-stagger="300" class="relative hidden lg:block">
+        <!-- TODO: reemplazar por fotos reales → <Figure src="/images/hero-1.jpg" .../> -->
+        <Figure
+          ratio="4/5"
+          accent="summit"
+          icon="users"
+          label="Foto principal"
+          alt="Equipo de Sherpas trabajando con líderes de una organización"
+          class="shadow-lift"
+        />
+        <div class="absolute -bottom-8 -left-8 w-44 rotate-[-4deg]">
+          <Figure
+            ratio="1/1"
+            accent="clay"
+            icon="image"
+            label="Taller"
+            alt="Taller de liderazgo de Sherpas"
+            class="border-4 border-paper shadow-lift"
+          />
+        </div>
+        <!-- Banderín cálido flotante -->
+        <div class="absolute -right-4 top-8 rounded-2xl border border-line bg-paper/95 px-4 py-3 shadow-soft backdrop-blur">
+          <p class="flex items-center gap-1.5 text-sm font-semibold text-summit">
+            <Icon name="target" class="h-4 w-4 text-clay" />
+            Personas al centro
+          </p>
+        </div>
       </div>
     </div>
   </div>
