@@ -13,6 +13,7 @@ interface Props {
   accent?: 'summit' | 'clay' | 'sage' | 'amber';
   icon?: string;
   label?: string;
+  position?: string; // object-position del recorte, p.ej. "center 35%"
   class?: string;
 }
 const {
@@ -22,6 +23,7 @@ const {
   accent = 'summit',
   icon = 'image',
   label,
+  position = 'center',
   class: className = '',
 } = Astro.props;
 
@@ -54,6 +56,7 @@ const accents: Record<string, string> = {
         loading="lazy"
         decoding="async"
         class="absolute inset-0 h-full w-full object-cover"
+        style={`object-position:${position}`}
         onerror="this.style.display='none'"
       />
     )
