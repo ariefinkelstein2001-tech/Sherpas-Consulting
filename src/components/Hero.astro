@@ -3,6 +3,7 @@ import MountainParallax from './MountainParallax.astro';
 import ContourBackground from './ContourBackground.astro';
 import Figure from './Figure.astro';
 import Icon from './Icon.astro';
+import { images } from '../data/images';
 
 // H1 dividido en líneas para entrada escalonada (stagger).
 const headlineLines = [
@@ -71,8 +72,8 @@ const headlineLines = [
 
       <!-- Composición de fotos (humaniza el hero) -->
       <div data-reveal data-reveal-stagger="300" class="relative hidden lg:block">
-        <!-- TODO: reemplazar por fotos reales → <Figure src="/images/hero-1.jpg" .../> -->
         <Figure
+          src={images.heroMain}
           ratio="4/5"
           accent="summit"
           icon="users"
@@ -82,6 +83,7 @@ const headlineLines = [
         />
         <div class="absolute -bottom-8 -left-8 w-44 rotate-[-4deg]">
           <Figure
+            src={images.heroSmall}
             ratio="1/1"
             accent="clay"
             icon="image"

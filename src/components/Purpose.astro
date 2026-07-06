@@ -2,6 +2,7 @@
 import Section from './Section.astro';
 import SectionNumber from './SectionNumber.astro';
 import Figure from './Figure.astro';
+import { images } from '../data/images';
 ---
 
 <Section id="proposito" bg="stone">
@@ -36,8 +37,8 @@ import Figure from './Figure.astro';
 
       <!-- Foto -->
       <div data-reveal data-reveal-stagger="150" class="relative">
-        <!-- TODO: reemplazar por foto real → <Figure src="/images/equipo.jpg" .../> -->
         <Figure
+          src={images.purpose}
           ratio="4/5"
           accent="summit"
           icon="users"
@@ -58,16 +59,13 @@ import Figure from './Figure.astro';
   </div>
 </Section>
 
-<!-- Remate del propósito sobre fondo cálido -->
-<div class="grain relative overflow-hidden bg-summit-deep py-16 text-stone sm:py-20">
-  <div
-    class="pointer-events-none absolute inset-0"
-    style="background:radial-gradient(80% 120% at 100% 0%, rgba(196,106,75,0.25), transparent 55%)"
-    aria-hidden="true"
-  >
-  </div>
+<!-- Remate del propósito: banda luminosa y cálida -->
+<div
+  class="relative overflow-hidden py-16 sm:py-20"
+  style="background:linear-gradient(120deg, #F6EBE2 0%, #F4F1EC 55%, #FBFAF7 100%)"
+>
   <div class="container-page relative">
-    <p data-reveal class="mx-auto max-w-3xl text-center font-serif text-2xl leading-snug sm:text-3xl">
+    <p data-reveal class="mx-auto max-w-3xl text-center font-serif text-2xl leading-snug text-ink sm:text-3xl">
       Nuestro sueño es acompañar a más organizaciones a llegar más lejos, sin dejar atrás lo que
       sostiene el camino: <span class="text-clay">sus personas.</span>
     </p>

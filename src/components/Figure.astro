@@ -1,8 +1,9 @@
 ---
-// Imagen con placeholder elegante. Si `src` está definido, muestra la foto;
-// si no, dibuja un placeholder cálido (gradiente + ícono) para que el layout
-// ya se vea "con fotos". Reemplaza luego soltando archivos en /public/images
-// y pasando `src="/images/archivo.jpg"`.
+// Imagen con placeholder elegante y carga tolerante a fallos.
+// - Si `src` existe y el archivo carga → muestra la foto.
+// - Si `src` no existe todavía (aún no subes el archivo) → muestra el placeholder
+//   cálido automáticamente (sin imagen rota), gracias al onerror.
+// Sube tus fotos a /public/images con el nombre indicado en cada `src`.
 import Icon from './Icon.astro';
 
 interface Props {
@@ -32,23 +33,29 @@ const accents: Record<string, string> = {
 };
 ---
 
-<figure
-  class={`relative overflow-hidden rounded-2xl ${className}`}
-  style={`aspect-ratio:${ratio}`}
->
+<figure class={`relative overflow-hidden rounded-2xl ${className}`} style={`aspect-ratio:${ratio}`}>
+  {/* Placeholder cálido (siempre presente, detrás de la imagen) */}
+  <div
+    class="grain absolute inset-0 flex flex-col items-center justify-center gap-2 text-paper/90"
+    style={`background:${accents[accent]}`}
+    role="img"
+    aria-label={alt || label || 'Imagen pendiente'}
+  >
+    <Icon name={icon} class="h-9 w-9 opacity-80" />
+    {label && <span class="text-xs font-medium uppercase tracking-wider opacity-80">{label}</span>}
+  </div>
+
+  {/* Imagen real: si el archivo no existe aún, onerror la oculta y se ve el placeholder */}
   {
-    src ? (
-      <img src={src} alt={alt} loading="lazy" decoding="async" class="h-full w-full object-cover" />
-    ) : (
-      <div
-        class="grain flex h-full w-full flex-col items-center justify-center gap-2 text-paper/90"
-        style={`background:${accents[accent]}`}
-        role="img"
-        aria-label={alt || label || 'Imagen pendiente'}
-      >
-        <Icon name={icon} class="h-9 w-9 opacity-80" />
-        {label && <span class="text-xs font-medium uppercase tracking-wider opacity-80">{label}</span>}
-      </div>
+    src && (
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover"
+        onerror="this.style.display='none'"
+      />
     )
   }
 </figure>
