@@ -8,7 +8,8 @@ sitio (mientras no existan, se muestra un placeholder cálido, nada se rompe).
 | `hero-principal.jpg` | Hero (foto grande) | Vertical (retrato) | 4:5 |
 | `hero-taller.jpg` | Hero (foto chica) | Cuadrada | 1:1 |
 | `equipo.jpg` | Sección Propósito | Vertical (retrato) | 4:5 |
-| `taller-banda.jpg` | Banda ancha (opcional) | Horizontal | 16:9 |
+| `taller-banda.jpg` | Banda ancha | Horizontal | 16:9 |
+| `galeria-1.jpg` … `galeria-6.jpg` | Slider "Momentos" | Horizontal | 4:3 |
 
 **Recomendaciones**
 - Formato `.jpg` o `.webp`. Peso ideal < 400 KB cada una (optimízalas antes de subir).
