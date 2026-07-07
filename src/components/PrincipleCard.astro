@@ -9,10 +9,10 @@ interface Props extends Principle {
 const { icon, title, body, stagger = 0, accent = 'summit' } = Astro.props;
 
 const accents: Record<string, { tint: string; chip: string; bar: string }> = {
-  summit: { tint: 'rgba(15,76,92,0.05)', chip: 'bg-summit/12 text-summit', bar: 'bg-summit' },
-  clay: { tint: 'rgba(196,106,75,0.07)', chip: 'bg-clay/15 text-clay', bar: 'bg-clay' },
-  amber: { tint: 'rgba(224,164,88,0.12)', chip: 'bg-[#E0A458]/20 text-[#b97c2f]', bar: 'bg-[#E0A458]' },
-  sage: { tint: 'rgba(92,123,120,0.10)', chip: 'bg-mist/30 text-summit-deep', bar: 'bg-[#5c7b78]' },
+  summit: { tint: 'rgba(74,93,224,0.06)', chip: 'bg-summit/12 text-summit', bar: 'bg-summit' },
+  clay: { tint: 'rgba(230,126,48,0.08)', chip: 'bg-clay/15 text-clay', bar: 'bg-clay' },
+  amber: { tint: 'rgba(242,166,90,0.14)', chip: 'bg-[#F2A65A]/25 text-[#b96a1f]', bar: 'bg-[#F2A65A]' },
+  sage: { tint: 'rgba(90,109,240,0.09)', chip: 'bg-[#5A6DF0]/15 text-[#3a4cc4]', bar: 'bg-[#5A6DF0]' },
 };
 const a = accents[accent];
 ---

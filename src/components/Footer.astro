@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'contacto@sherpasconsulting.cl';
 const year = new Date().getFullYear();
 
@@ -20,7 +21,7 @@ const navLinks = [
       <!-- Marca -->
       <div>
         <a href="#inicio" class="flex items-center gap-2.5 text-ink" aria-label="Sherpas Consulting — inicio">
-          <Icon name="mountain" class="h-6 w-6 text-summit" />
+          <img src={`${base}/logo-mark.svg`} alt="" width="34" height="26" class="h-7 w-auto" />
           <span class="font-serif text-lg font-semibold tracking-tight">
             Sherpas<span class="text-summit"> Consulting</span>
           </span>

@@ -8,16 +8,17 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#sky)"/>
-  <g fill="none" stroke="#9FB8B5" stroke-width="1.5" opacity="0.4">
+  <circle cx="600" cy="150" r="34" fill="#F5933B"/>
+  <g fill="none" stroke="#AEB6DC" stroke-width="1.5" opacity="0.5">
     <path d="M-50,180 C200,150 400,210 700,180 C900,160 1100,200 1250,180"/>
     <path d="M-50,120 C220,95 430,150 700,125 C920,105 1110,140 1250,120"/>
   </g>
-  <path d="M0,470 L240,330 L420,410 L640,280 L880,400 L1080,320 L1280,400 L1200,630 L0,630 Z" fill="#8aa9a4"/>
-  <path d="M0,540 L200,420 L400,500 L640,380 L860,500 L1080,420 L1280,500 L1200,630 L0,630 Z" fill="#5c7b78"/>
-  <path d="M0,630 L160,520 L420,580 L640,500 L880,580 L1120,520 L1280,580 L1200,630 Z" fill="#0a363f"/>
-  <g font-family="Georgia, serif" fill="#1C2B2D">
+  <path d="M0,470 L240,330 L420,410 L640,280 L880,400 L1080,320 L1280,400 L1200,630 L0,630 Z" fill="#c7cdec"/>
+  <path d="M0,540 L200,420 L400,500 L640,380 L860,500 L1080,420 L1280,500 L1200,630 L0,630 Z" fill="#6f7fd6"/>
+  <path d="M0,630 L160,520 L420,580 L640,500 L880,580 L1120,520 L1280,580 L1200,630 Z" fill="#303c93"/>
+  <g font-family="Georgia, serif" fill="#20264A">
     <text x="90" y="250" font-size="64" font-weight="600">Sherpas Consulting</text>
-    <text x="92" y="320" font-size="30" fill="#0F4C5C">Gestión de personas · Liderazgo · Desarrollo organizacional</text>
-    <text x="92" y="372" font-size="26" font-style="italic" fill="#C46A4B">Porque ninguna cima se alcanza sola.</text>
+    <text x="92" y="320" font-size="30" fill="#4A5DE0">Gestión de personas · Liderazgo · Desarrollo organizacional</text>
+    <text x="92" y="372" font-size="26" font-style="italic" fill="#E67E30">Porque ninguna cima se alcanza sola.</text>
   </g>
 </svg>

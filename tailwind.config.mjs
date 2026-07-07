@@ -4,17 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Tokens de marca — ver MASTER PROMPT §3. Mood: alpino + cálido + tierra.
-        ink: '#1C2B2D', // Texto principal (pizarra de montaña)
+        // Tokens de marca Sherpas — azul + naranjo del logo, sobre neutros cálidos.
+        ink: '#20264A', // Texto principal (azul pizarra profundo)
         summit: {
-          DEFAULT: '#0F4C5C', // Primario — teal alpino profundo
-          deep: '#0A363F', // Hover / fondos oscuros de sección
+          DEFAULT: '#4A5DE0', // Primario — azul Sherpas
+          deep: '#303C93', // Hover / fondos oscuros de sección
         },
-        clay: '#C46A4B', // Acento cálido (terracota) — con moderación
-        mist: '#9FB8B5', // Secundario suave, líneas, detalles
+        clay: '#E67E30', // Acento cálido — naranjo Sherpas
+        mist: '#AEB6DC', // Secundario suave, líneas, detalles (periwinkle)
         stone: '#F4F1EC', // Fondo cálido principal (no blanco puro)
         paper: '#FBFAF7', // Fondo de tarjetas / contraste sutil
-        line: '#E2DCD2', // Bordes y divisores
+        line: '#E4DFD4', // Bordes y divisores
       },
       fontFamily: {
         serif: ['Fraunces Variable', 'Source Serif 4', 'Lora', 'Georgia', 'serif'],

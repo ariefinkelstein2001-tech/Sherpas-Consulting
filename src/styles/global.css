@@ -11,14 +11,14 @@
    Centralizados aquí para SVGs, gradientes y utilidades puntuales.
 ---------------------------------------------------------------------------- */
 :root {
-  --ink: #1c2b2d;
-  --summit: #0f4c5c;
-  --summit-deep: #0a363f;
-  --clay: #c46a4b;
-  --mist: #9fb8b5;
+  --ink: #20264a;
+  --summit: #4a5de0;
+  --summit-deep: #303c93;
+  --clay: #e67e30;
+  --mist: #aeb6dc;
   --stone: #f4f1ec;
   --paper: #fbfaf7;
-  --line: #e2dcd2;
+  --line: #e4dfd4;
 
   --header-h: 4.5rem;
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
@@ -58,7 +58,7 @@
   }
 
   ::selection {
-    background: rgba(15, 76, 92, 0.16);
+    background: rgba(74, 93, 224, 0.18);
   }
 }
 

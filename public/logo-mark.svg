@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" fill="none" role="img" aria-label="Sherpas Consulting">
+  <!-- Sol -->
+  <circle cx="100" cy="40" r="13" fill="#F5933B"/>
+  <!-- Montaña derecha -->
+  <path d="M92 104 L131 40 L172 104 Z" fill="#4F63E8"/>
+  <!-- Montaña izquierda -->
+  <path d="M28 104 L69 46 L110 104 Z" fill="#5A6DF0"/>
+  <!-- Nieve (chevrons blancos) -->
+  <path d="M69 46 L58 62 L64 62 L69 55 L74 62 L80 62 Z" fill="#FFFFFF"/>
+  <path d="M131 40 L119 57 L126 57 L131 50 L136 57 L143 57 Z" fill="#FFFFFF"/>
+  <!-- Lago / base -->
+  <ellipse cx="100" cy="115" rx="46" ry="5" fill="#F5933B"/>
+</svg>
