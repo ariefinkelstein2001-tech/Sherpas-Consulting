@@ -34,10 +34,15 @@
     text-rendering: optimizeLegibility;
   }
 
+  html {
+    overflow-x: hidden; /* evita el desborde/franja lateral en móvil */
+  }
+
   body {
     @apply bg-stone text-ink font-sans antialiased;
     font-feature-settings: 'ss01', 'cv01';
     line-height: 1.65;
+    max-width: 100%;
     overflow-x: hidden; /* evita scroll horizontal por elementos decorativos */
   }
 

@@ -13,7 +13,7 @@ const typeIcon: Record<string, string> = {
 
 <Section id="recursos" bg="paper">
   <div class="relative">
-    <SectionNumber number="06" class="absolute -top-12 right-0 text-[7rem] sm:text-[10rem]" />
+    <SectionNumber number="06" class="absolute -top-6 right-0 text-[3rem] sm:-top-12 sm:text-[6rem] lg:text-[9rem]" />
 
     <div class="relative mb-10 max-w-2xl">
       <p data-reveal class="mb-3 text-sm font-medium uppercase tracking-wider text-summit">
@@ -33,16 +33,16 @@ const typeIcon: Record<string, string> = {
             rel="noopener noreferrer"
             data-reveal
             data-reveal-stagger={i * 70}
-            class="group flex items-center gap-4 rounded-2xl border border-line bg-stone p-5 transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-summit/30 hover:shadow-soft"
+            class="group flex items-center gap-3.5 rounded-xl border border-line bg-stone p-4 transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-summit/30 hover:shadow-soft sm:gap-4 sm:rounded-2xl sm:p-5"
           >
-            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-summit/8 text-summit transition-colors group-hover:bg-summit group-hover:text-paper">
+            <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-summit/8 text-summit transition-colors group-hover:bg-summit group-hover:text-paper sm:h-11 sm:w-11 sm:rounded-xl">
               <Icon name={typeIcon[r.type]} class="h-5 w-5" />
             </span>
             <span class="min-w-0 flex-1">
-              <span class="block text-xs font-medium uppercase tracking-wider text-clay">
+              <span class="block text-[0.7rem] font-medium uppercase tracking-wider text-clay sm:text-xs">
                 {r.typeLabel} · {r.source}
               </span>
-              <span class="mt-0.5 block truncate font-medium text-ink">{r.title}</span>
+              <span class="mt-0.5 block truncate text-sm font-medium text-ink sm:text-base">{r.title}</span>
             </span>
             <Icon
               name="arrow-up-right"
