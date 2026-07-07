@@ -38,6 +38,7 @@
     @apply bg-stone text-ink font-sans antialiased;
     font-feature-settings: 'ss01', 'cv01';
     line-height: 1.65;
+    overflow-x: hidden; /* evita scroll horizontal por elementos decorativos */
   }
 
   h1,

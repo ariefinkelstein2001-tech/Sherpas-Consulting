@@ -13,18 +13,24 @@ import { images } from '../data/images';
       icon="users"
       label="Foto de un taller"
       alt="Taller de Sherpas Consulting con un equipo de trabajo"
-      class="!rounded-none max-h-[70vh]"
+      class="!rounded-none min-h-[380px] max-h-[70vh] sm:min-h-[440px]"
     />
-    <!-- Degradé para legibilidad del texto -->
+    <!-- Degradé para legibilidad del texto (vertical en móvil, horizontal en desktop) -->
     <div
-      class="pointer-events-none absolute inset-0"
+      class="pointer-events-none absolute inset-0 sm:hidden"
+      style="background:linear-gradient(0deg, rgba(10,54,63,0.85) 0%, rgba(10,54,63,0.35) 45%, rgba(10,54,63,0.15) 100%)"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-0 hidden sm:block"
       style="background:linear-gradient(90deg, rgba(10,54,63,0.72) 0%, rgba(10,54,63,0.35) 45%, transparent 75%)"
       aria-hidden="true"
     >
     </div>
-    <div class="absolute inset-0 flex items-center">
-      <div class="container-page">
-        <p data-reveal class="max-w-lg font-serif text-2xl font-medium leading-snug text-stone sm:text-3xl md:text-4xl">
+    <div class="absolute inset-0 flex items-end sm:items-center">
+      <div class="container-page pb-8 sm:pb-0">
+        <p data-reveal class="max-w-lg font-serif text-xl font-medium leading-snug text-stone sm:text-3xl md:text-4xl">
           El desarrollo real ocurre en el día a día: en las conversaciones, decisiones y hábitos de
           cada equipo.
         </p>
